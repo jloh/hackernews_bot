@@ -5,19 +5,19 @@ on:
     - cron: '*/5 * * * *'
 
 jobs:
-  analyze:
+  run:
     name: Check frontpage
     runs-on: ubuntu-latest
     permissions:
       contents: read
     concurrency: live_bot
 
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Setup go
-      uses: actions/setup-go@v3
-      with:
-        go-version: '1.19'
-    - name: Run bot
-      run: go run bot.go
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - name: Run bot
+        run: go run bot.go
