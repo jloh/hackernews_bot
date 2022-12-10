@@ -21,3 +21,7 @@ jobs:
           go-version: '1.19'
       - name: Run bot
         run: go run bot.go
+        env:
+          DSN: ${{ secrets.DSN }}
+          TOOT_TOKEN: ${{ secrets.TOOT_TOKEN }}
+          TOOT_SERVER: ${{ secrets.TOOT_SERVER }}
