@@ -4,6 +4,8 @@ github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWm
 github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/mattn/go-mastodon v0.0.6 h1:lqU1sOeeIapaDsDUL6udDZIzMb2Wqapo347VZlaOzf0=
 github.com/mattn/go-mastodon v0.0.6/go.mod h1:cg7RFk2pcUfHZw/IvKe1FUzmlq5KnLFqs7eV2PHplV8=
+github.com/mattn/go-mastodon v0.0.7-0.20221130174906-ae970802cfcf h1:9TtVf3gR+FM5WGvzWFjUfQpJEejfBJX6MbyhlzWguKc=
+github.com/mattn/go-mastodon v0.0.7-0.20221130174906-ae970802cfcf/go.mod h1:cg7RFk2pcUfHZw/IvKe1FUzmlq5KnLFqs7eV2PHplV8=
 github.com/peterhellberg/hn v0.0.0-20200407070403-5537ecc08ef1 h1:rrx0kfNLD1Kua2nY4hjy0kjkPe12pmgki5D+xlRP1EU=
 github.com/peterhellberg/hn v0.0.0-20200407070403-5537ecc08ef1/go.mod h1:4NUrlv14rntJHyfqrF46i63j+7lUU8yIx/y6ORuO32M=
 github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 h1:nrZ3ySNYwJbSpD6ce9duiP+QkD3JuLCcWkdaehUS/3Y=
