@@ -15,22 +15,38 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func createToot(item *hn.Item, db *sql.DB, tooter *mastodon.Client) (*mastodon.Status, error) {
-	// Create a toot
+func formatToot(item *hn.Item) string {
 	var tootText string
 	if strings.Contains(item.URL, "https://news.ycombinator.com/item?id=") {
 		tootText = fmt.Sprintf("%s\nL: %s", item.Title, item.URL)
 	} else {
 		tootText = fmt.Sprintf("%s\nL: %s\nC: https://news.ycombinator.com/item?id=%v", item.Title, item.URL, item.ID)
 	}
+
+	return tootText
+}
+
+func createToot(item *hn.Item, tooter *mastodon.Client) (*mastodon.Status, error) {
 	toot, err := tooter.PostStatus(context.Background(), &mastodon.Toot{
-		Status: tootText,
+		Status: formatToot(item),
 	})
 
 	if err != nil {
 		return toot, err
 	} else {
 		return toot, nil
+	}
+}
+
+func updateToot(item *hn.Item, toot_id int, tooter *mastodon.Client) error {
+	_, err := tooter.UpdateStatus(context.Background(), &mastodon.Toot{
+		Status: formatToot(item),
+	}, mastodon.ID(fmt.Sprintf("%v", toot_id)))
+
+	if err != nil {
+		return err
+	} else {
+		return nil
 	}
 }
 
@@ -52,14 +68,14 @@ func handleItem(pos int, id int, hn *hn.Client, tooter *mastodon.Client, db *sql
 		switch {
 		case err == sql.ErrNoRows:
 			log.Printf("Creating toot for: %v\n", item.ID)
-			toot, err := createToot(item, db, tooter)
+			toot, err := createToot(item, tooter)
 			if err != nil {
 				log.Printf("Failed sending toot: %v\n", err)
 			} else {
 				log.Printf("Created toot for item %v (%s/@hackernews/%v)", item.ID, os.Getenv("TOOT_SERVER"), toot.ID)
 				// Save our toot in the DB
 				_, err := db.Exec(`INSERT INTO posts (
-					hn_id, toot_id, posted_at) VALUES(?,?,?)`, item.ID, toot.ID, toot.CreatedAt)
+					hn_id, toot_id, posted_at, hn_points, hn_comments) VALUES(?,?,?,?,?)`, item.ID, toot.ID, toot.CreatedAt, item.Score, item.Descendants)
 				if err != nil {
 					log.Printf("Failed saving toot to DB: %v\n", err)
 				}
