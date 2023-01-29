@@ -38,17 +38,17 @@ func createToot(item *hn.Item, tooter *mastodon.Client) (*mastodon.Status, error
 	}
 }
 
-func updateToot(item *hn.Item, toot_id int, tooter *mastodon.Client) error {
-	_, err := tooter.UpdateStatus(context.Background(), &mastodon.Toot{
-		Status: formatToot(item),
-	}, mastodon.ID(fmt.Sprintf("%v", toot_id)))
+// func updateToot(item *hn.Item, toot_id int, tooter *mastodon.Client) error {
+// 	_, err := tooter.UpdateStatus(context.Background(), &mastodon.Toot{
+// 		Status: formatToot(item),
+// 	}, mastodon.ID(fmt.Sprintf("%v", toot_id)))
 
-	if err != nil {
-		return err
-	} else {
-		return nil
-	}
-}
+// 	if err != nil {
+// 		return err
+// 	} else {
+// 		return nil
+// 	}
+// }
 
 func handleItem(pos int, id int, hn *hn.Client, tooter *mastodon.Client, db *sql.DB) {
 	item, err := hn.Item(id)
