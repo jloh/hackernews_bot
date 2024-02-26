@@ -1,6 +1,6 @@
 module go.jloh.dev/hackernews_bot
 
-go 1.19
+go 1.21
 
 require (
 	github.com/go-sql-driver/mysql v1.7.1
@@ -9,6 +9,7 @@ require (
 )
 
 require (
-	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 // indirect
+	golang.org/x/net v0.17.0 // indirect
 )
